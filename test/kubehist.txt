@@ -1,0 +1,50 @@
+    1  sudo snap install conjure-up --classic
+    2  conjure-up kubernetes
+    3  exit
+    4  conjure-up kubernetes
+    5  sudo snap refresh conjure-up --edge
+    6  conjure-up kubernetes
+    7  exit
+    8  conjure-up kubernetes
+    9  sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add 
+   10  sudo ls
+   11  sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add 
+   12  echo deb http://apt.kubernetes.io/ kubernetes-xenial main 
+   13  echo deb http://apt.kubernetes.io/ kubernetes-xenial main  >> /etc/apt/sources.list.d/kubernetes.list
+   14  sudo echo deb http://apt.kubernetes.io/ kubernetes-xenial main  >> /etc/apt/sources.list.d/kubernetes.list
+   15  sudo echo deb http://apt.kubernetes.io/ kubernetes-xenial main  >> sudo /etc/apt/sources.list.d/kubernetes.list
+   16  cat /etc/apt/sources.list.d/
+   17  sudo "echo deb http://apt.kubernetes.io/ kubernetes-xenial main  >> /etc/apt/sources.list.d/kubernetes.list "
+   18  sudo echo deb http://apt.kubernetes.io/ kubernetes-xenial main  >> /etc/apt/sources.list.d/kubernetes.list 
+   19  sudo touch /etc/apt/sources.list.d/kubernetes.list
+   20  sudo chmod 777 /etc/apt/sources.list.d/kubernetes.list 
+   21  sudo echo deb http://apt.kubernetes.io/ kubernetes-xenial main  >> /etc/apt/sources.list.d/kubernetes.list 
+   22  apt-get update
+   23  sudo apt-get update
+   24  apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+   25  sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
+   26  kubeadm  init
+   27  sudo kubeadm  init
+   28  sudo apt-get install docker.io
+   29  sudo systemctl start docker
+   30  sudo systemctl enable docker
+   31  sudo kubeadm  init
+   32  mkdir -p $HOME/.kube
+   33  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   34  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   35  sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+   36  sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+   37  kubectl get pod
+   38  kubectl get pod -n kube-system
+   39  kubectl logs kube-flannel-ds-5xrtb -n kube-system
+   40  kubeadmin init --help
+   41  kubeadm init --help
+   42  sudo kubeadm reset
+   43  sudo kubeadm  init --pod-network-cidr 10.96.0.0/14 --service-cidr 10.100.0.0/14
+   44  mkdir -p $HOME/.kube
+   45  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   46  sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+   47  sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+   48  kubectl get pod -n kube-system
+   49  history
+   50  history > kubehist.txt
