@@ -120,7 +120,7 @@ Vagrant.configure("2") do |config|
       nodeconfig.vm.boot_timeout = 300
       vb.memory = "2048"
       vb.cpus = "2"
-      if (node[:vmimg] == 'kmunson/lubuntu-16.04')
+      if (node[:vmimg] == 'kmunson/px-lubuntu')
         vb.gui = true
       #else
         #vb.customize ['createhd', '--filename', "vdisk3-" + node[:hostname] + ".vmdk", '--size', 20480 * 1024]
