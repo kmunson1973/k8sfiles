@@ -32,7 +32,7 @@ spec:
   selector:
     app: wordpress
     tier: mysql
-  clusterIP: None
+  #clusterIP: None
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment

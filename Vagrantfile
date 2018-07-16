@@ -46,9 +46,10 @@ $primstrscr = <<-PRISCRIPT
   # apt-get -y install docker.io
   # systemctl start docker
   # systemctl enable docker
-  apt-get install -y kubelet=1.9.8-00 kubeadm=1.9.8-00 kubectl=1.9.8-00 kubernetes-cni
+  apt-get install -y kubelet=1.9.8-00 kubeadm=1.9.8-00 kubectl=1.9.8-00 kubernetes-cni bash-completion
   echo "source <(kubectl completion bash)" >> /home/vagrant/.bashrc
-   kubeadm  init --pod-network-cidr 10.244.0.0/16 --service-cidr 10.100.0.0/14 --apiserver-advertise-address 192.168.0.11
+  #kubeadm  init --pod-network-cidr 10.244.0.0/16 --service-cidr 10.100.0.0/14 --apiserver-advertise-address 192.168.0.11
+  kubeadm  init --pod-network-cidr 10.244.0.0/16 --apiserver-advertise-address 192.168.0.11
   mkdir -p /home/vagrant/.kube
   mkdir -p /$HOME/.kube
   cp -i /etc/kubernetes/admin.conf /$HOME/.kube/config
@@ -92,7 +93,7 @@ $lbscr = <<-LBSCRIPT
 LBSCRIPT
 
 nodes = [
-  { :hostname => 'umstr01',   :ip => '192.168.0.11', :script => $primstrscr, :vmimg => 'kmunson/lubuntu-16.04' },
+  { :hostname => 'umstr01',   :ip => '192.168.0.11', :script => $primstrscr, :vmimg => 'kmunson/px-lubuntu' },
 #  { :hostname => 'umstr02',   :ip => '192.168.0.43' },
 #  { :hostname => 'umstr03',   :ip => '192.168.0.44' },
   { :hostname => 'unode01',   :ip => '192.168.0.21', :script => $basescr, :vmimg => 'kmunson/ubuntu-16.04'},
@@ -115,12 +116,17 @@ Vagrant.configure("2") do |config|
       nodeconfig.vm.provider :virtualbox do |vb|
       nodeconfig.ssh.username = "vagrant"
       nodeconfig.ssh.password = "vagrant"
-      nodeconfig.ssh.insert_key  = "true"
-      nodeconfig.vm.boot_timeout = 600
+      #nodeconfig.ssh.insert_key  = "true"
+      nodeconfig.vm.boot_timeout = 300
       vb.memory = "2048"
       vb.cpus = "2"
       if (node[:vmimg] == 'kmunson/lubuntu-16.04')
         vb.gui = true
+      #else
+        #vb.customize ['createhd', '--filename', "vdisk3-" + node[:hostname] + ".vmdk", '--size', 20480 * 1024]
+        #vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', "vdisk3-" + node[:hostname] + ".vmdk"]
+        #vb.customize ['createhd', '--filename', "vdisk4-" + node[:hostname] + ".vmdk", '--size', 20480 * 1024]
+        #vb.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 4, '--device', 0, '--type', 'hdd', '--medium', "vdisk4-" + node[:hostname] + ".vmdk"]
       end 
       vb.customize ["modifyvm", :id,  '--macaddress1', 'auto']
       vb.linked_clone = true
